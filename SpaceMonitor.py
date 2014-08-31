@@ -45,7 +45,7 @@ class SpaceAPIOpenClose: # publish open/closed status via the SpaceAPI
 		f = open("/home/pi/spaceapi-token", "r") #"/home/pi/spaceapi-net.pem"
 		try:
 			s = self.json.dumps({"state" : {"open" : status}}, separators=(',', ':'))
-			r = self.requests.get(self.base_uri + "/sensor/set", verify=False,
+			r = self.requests.get(self.base_uri + "/sensor/set/", verify=False,
 			                      params={"sensors": s, "key": f.readline().strip()})
 			if self.logging.getLogger().isEnabledFor(self.logging.DEBUG):
 				text = r.text
