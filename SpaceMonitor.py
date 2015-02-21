@@ -25,6 +25,7 @@ class SpaceAPIOpenClose: # publish open/closed status via the SpaceAPI
 
 	# configuration
 	base_uri = "https://spaceapi.net/new/space/melbourne_makerspace"
+	token_file = "/home/pi/spaceapi-token" #"/home/pi/spaceapi-net.pem"
 
 	try:
 		import http.client as http_client
@@ -42,7 +43,7 @@ class SpaceAPIOpenClose: # publish open/closed status via the SpaceAPI
 
 	def sendStatus(self, status):
 		r = ""
-		f = open("/home/pi/spaceapi-token", "r") #"/home/pi/spaceapi-net.pem"
+		f = open(token_file, "r")
 		try:
 			s = self.json.dumps({"state" : {"open" : status}}, separators=(',', ':'))
 			r = self.requests.get(self.base_uri + "/sensor/set/", verify=False,
