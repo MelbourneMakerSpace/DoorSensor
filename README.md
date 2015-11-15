@@ -18,6 +18,19 @@ The SpaceMonitor.py and SpaceMonitorTest.py scripts should, by default, be
 installed in /home/pi/bin.  If you wish to install them in a different
 location, you will need to modify spaceMonitor.sh, as described above.
 
+You will need to install the "requests" module for python.
+First do:  
+```
+sudo apt-get update
+sudo apt-get install python-pip
+```
+Then you can install the "requests" module:
+```
+sudo pip install requests
+```
+
+You will also need to create a text file in the /home/pi directory called spaceapi-token.  This file can be found in the secure melmak folder on the makerspace's google drive.  This token allows the SpaceMonitor.py file to update our status in the hosted space api.
+
 You will also need to adjust the values in the "configuration" section near
 the top of SpaceMonitor.py to point to the correct URL for your SpaceAPI
 profile and to the file containing your SpaceAPI security token, which will
