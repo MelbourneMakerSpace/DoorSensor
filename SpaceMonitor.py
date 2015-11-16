@@ -43,7 +43,7 @@ class SpaceAPIOpenClose: # publish open/closed status via the SpaceAPI
 
 	def sendStatus(self, status):
 		r = ""
-		f = open(token_file, "r")
+		f = open(self.token_file, "r")
 		try:
 			s = self.json.dumps({"state" : {"open" : status}}, separators=(',', ':'))
 			r = self.requests.get(self.base_uri + "/sensor/set/", verify=False,
