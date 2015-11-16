@@ -24,9 +24,19 @@ First do:
 sudo apt-get update
 sudo apt-get install python-pip
 ```
-Then you can install the "requests" module:
+Then make sure you have the python development files, etc.
+```
+sudo apt-get install python-dev
+sudo apt-get install libffi-dev
+```
+Then go ahead and upgrade pip and some other packages
+```
+sudo pip install --upgrade pyopenssl ndg-httpsclient pyasn1 pip
+```
+Then you can install the "requests" module and the SSL security packages:
 ```
 sudo pip install requests
+sudo pip install requests[security]
 ```
 
 You will also need to create a text file in the /home/pi directory called spaceapi-token.  This file can be found in the secure melmak folder on the makerspace's google drive.  This token allows the SpaceMonitor.py file to update our status in the hosted space api.
