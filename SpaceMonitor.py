@@ -104,22 +104,21 @@ class GPIODoorSensor: # read open/closed status from door sensor via GPIO
 def monitor(sensor, openClose): # loop, reading sensor and publishing status
 	from time import sleep
 
-	doorClosed = True # set the initial door State to closed
-	doorCount = 0     # for how many cycles has the sensor differed from saved state?
-
+	switchState = sensor.read() # set the initial door State to the state of the switch
+	lastState = switchState
+	
 	# main program loop
 	try:             
 		while True:
-			doorCount = doorCount + 1 if sensor.read() != doorClosed else 0
-			if doorCount > 3:     # trigger after 1.5 seconds (3 * 0.5)
-				if doorClosed:    # magnet is not present, door is open
+			switchState = sensor.read()
+			if switchState != lastState:
+				lastState = switchState
+				if switchState == True:
 					openClose.openUp()
-				else:             # magnet is present, door is closed
+				else:
 					openClose.closeUp()
-				doorClosed = not doorClosed  # toggle saved state
-				doorCount = 0
-
-			sleep(0.5)
+			sleep(5)                        
+			
 	except KeyboardInterrupt:
 		pass
 	finally:
@@ -140,4 +139,4 @@ if __name__ == "__main__":
 	                    level=loglevel) #datefmt=logDateFormat,
 
 	# start SpaceMonitor with GPIO Sensor and SpaceAPI
-	monitor(GPIODoorSensor(), SpaceAPIOpenClose())
+	monitor(GPIODoorSensor(True), SpaceAPIOpenClose())

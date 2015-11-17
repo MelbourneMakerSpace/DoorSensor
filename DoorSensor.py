@@ -33,7 +33,7 @@ while True:
                 print("Switch state TRUE, door is open!")
             
         # Wait a while before checking again.
-        sleep(10)
+        sleep(1)
      
     except KeyboardInterrupt:
         GPIO.cleanup() # Clean up GPIO on CTRL+C exit
