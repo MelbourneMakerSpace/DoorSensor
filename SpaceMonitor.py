@@ -106,13 +106,15 @@ def monitor(sensor, openClose): # loop, reading sensor and publishing status
 
 	switchState = sensor.read() # set the initial door State to the state of the switch
 	lastState = switchState
+	initialCheck = True #always check the first time through when script starts!
 	
 	# main program loop
 	try:             
 		while True:
 			switchState = sensor.read()
-			if switchState != lastState:
+			if switchState != lastState or initialCheck:
 				lastState = switchState
+				initialCheck = False
 				if switchState == True:
 					openClose.openUp()
 				else:
